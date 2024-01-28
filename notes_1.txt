@@ -1,0 +1,213 @@
+///////////////////////
+// important things 
+
+    <servlet>
+        <servlet-name>add</servlet-name>   
+        <servlet-class>com.add.AddServlet</servlet-class> 
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>add</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+
+
+// create pages in WEB-INF/
+
+// create servlets in Java Resources/ (just right click on the project and done
+
+//////////////////////////
+// Writing output
+
+resp.setContentType("text/html");
+PrintWriter rs = resp.getWriter();
+rs.println("result is: " + z);
+
+//////////////////////////////////
+// Redirection (Request Dispatcher)
+
+        req.setAttribute("key", "value"); // data passing
+        RequestDispatcher rd = req.getRequestDispatcher("/url");
+        rd.forward(req, resp);
+
+////////////////////////////////
+// Redirection (sendRedirect)
+
+// Data passing using sessions
+
+// url rewriting
+resp.sendRedirect("/url");
+resp.sendRedirect("/url?name=leo&age=20");
+    
+////////////////////////////////
+// SESSION
+
+        HttpSession session = req.getSession();
+        session.setAttribute("key", a);
+        session.getAttribute(a);
+        session.removeAttribute("k");
+    
+
+//////////////////////////////
+// COOKIE
+
+// setting
+Cookie cookie = new Cookie("key" , "value");
+res.addCookie(cookie);
+
+//getting
+
+Cookie cookie[] = req.getCookies();
+int k;
+for(Cookie c: cookie) {
+    if(c.getName("k").equals("k")) {
+        k = Integer.parseInt(c.getValue("k"));
+        break;
+    }
+}
+
+    
+///////////////////////////////
+// ServletConfig && ServletContext
+
+// some values that servlets can use. {ServletContext}
+
+<context-param>
+  <param-name>name</param-name>
+  <param-value>value</param-value>
+</context-param>
+    
+// to get in servlet
+
+ServletContext ctx = getServletContext();
+String value = ctx.getInitParam("name");
+
+// some values that servlets can use. {ServletConfig}
+// this is specific for the servlet itself.
+
+<servlet>
+  <servlet-name>add</servlet-name>
+  <servlet-class>com.add.AddServlet</servlet-class>
+  <init-param>
+    <param-name>name</param-name>
+    <param-value>leo</param-value>
+  </init-param>
+</servlet>
+
+// get value
+
+ServletConfig sc = getServletConfig();
+String sr = sc.getInitParameter("name");
+
+/////////////////////////
+// Servlet Annotation Config
+
+@WebServlet("/url")
+
+///////////////////////
+// JSP 
+
+// Jsp is translated to servlet 
+
+// We can write java in html 
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <%
+  int x = Integer.parseInt(request.getParameter("one"));
+  out.println(x);
+  %>
+</body>
+</html>
+
+declaration 
+<%!
+  // we declare variables , functions here.
+%>
+
+service (this code goes inside service() function.
+<%
+  // we do logic here 
+%>
+
+expression (we use this for output)
+<%= output %>
+    
+directive
+<%@page import = "java.util.ArrayList"%>
+<%@page 
+language="java"
+extends=""
+import=""
+sessoin="false"
+autoFlush="true"
+contentType=""
+errorPage="errorpage_url"
+isErrorPage="false"
+isThreadSafe="true"
+%>
+
+// to include other jsp in out jsp
+<%@include file="filename.jsp" %>
+
+// component stuff
+
+// external tags. 
+<%@taglib uri="" prefix="fx" %>
+
+<fx:h1>
+
+//////////////////////////
+// Implect Objects in JSP
+
+request 
+response
+pageContent (page context)
+out
+session
+application (context)
+config
+
+/////////////////////////
+// Error Handling in JSP
+
+you can use try catch
+
+if isErrorPage="true" in the @page
+
+then we can use a "exception " object
+
+we have to mention errorPage="error.jsp"
+
+then exception.getMessage()
+
+////////////////////////
+// MVC 
+
+Busness logic = servlet
+View logic = jsp page
+
+To send data , we send it in the form of POJO (plain old java object)
+
+class Student{
+  age
+  marks
+  email
+}
+
+send(new Student(age , marks , email))
+
+client -> controller -> service class -> DAO (data access object) -> DataBase
+
+
+
+
+
+    
