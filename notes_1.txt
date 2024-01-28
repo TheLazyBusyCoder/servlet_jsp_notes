@@ -208,6 +208,53 @@ client -> controller -> service class -> DAO (data access object) -> DataBase
 
 
 
+JSTL
+
+JSP standard tag library
+
+// inside servlet
+
+request.setAttribute("label" , "leo");
+RequestDispatcher rd = request.getRequestDispatcher("display.jsp");
+rd.forward(request , response);
+
+// display.jsp
+
+${label}
+
+////////////////////////////////
+// JSTL
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+// press control + space you will get options
+
+<c:out value="hello world" />
+
+you first have to download jstl.jar and store in WEB-INF/lib/
+and in Libraries/
+
+<c:forEach items="${}" var="s">
+  ${s.name}<br>
+</c:forEach>
+
+
+///////////////////////////
+// Filters 
+
+user -> F (common) -> a
+user -> F (common) -> b
+
+F: a filter that check if user is have permission for accessing a , b
+
+web.xml
+
+// to create a new filter file.
+// new -> Filter -> /req -> done
+
+inside doFilter()
+
+HttpServletRequest req = (HttpServletRequest) request
+
 
 
     
